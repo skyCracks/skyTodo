@@ -17,7 +17,10 @@
 * **Todo功能： 新增、待办、已完成等功能**
 
 # 项目截图
-![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_01.png) ![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_02.png)
+<div align="center">
+  img src="https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_01.png" height="330" width="190" >
+  ![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_02.png)
+  </div>
 ![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_03.png)
 ![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_04.png)
 ![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_05.png)
