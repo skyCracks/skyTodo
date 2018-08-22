@@ -14,6 +14,7 @@ import com.skycracks.todo.core.widget.BottomNavigationViewHelper
 import com.skycracks.todo.ui.activity.todo.AddTodoActivity
 import com.skycracks.todo.ui.fragment.account.MineFragment
 import com.skycracks.todo.ui.fragment.todo.TodoTypeFragment
+import interval
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -46,9 +47,11 @@ class MainActivity : BaseActivity() {
             selectedItemId = R.id.action_no_todo
         }
         addTodoFloatButton.setOnClickListener {
-            EventBus.getDefault().postSticky(TodoEvent(currentType,Constant.TODO_STATUS_ADD, null))
-            Intent(this@MainActivity, AddTodoActivity::class.java).run {
-                startActivity(this)
+            it.interval {
+                EventBus.getDefault().postSticky(TodoEvent(currentType, Constant.TODO_STATUS_ADD, null))
+                Intent(this@MainActivity, AddTodoActivity::class.java).run {
+                    startActivity(this)
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ import com.skycracks.todo.core.util.StatusBarUtil
 import com.skycracks.todo.mvp.contract.account.LoginContract
 import com.skycracks.todo.mvp.presenter.account.LoginPresenter
 import com.skycracks.todo.ui.activity.MainActivity
+import interval
 import kotlinx.android.synthetic.main.activity_login.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -41,8 +42,10 @@ class LoginActivity : MvpActivity<LoginContract.View, LoginPresenter>(), LoginCo
             passwordEdit.setText(password)
         }
         login.setOnClickListener{
-            if (checkLogin()) {
-                mPresenter?.loginWanAndroid(usernameEdit.text.toString(), passwordEdit.text.toString())
+            it.interval {
+                if (checkLogin()) {
+                    mPresenter?.loginWanAndroid(usernameEdit.text.toString(), passwordEdit.text.toString())
+                }
             }
         }
         register.setOnClickListener{

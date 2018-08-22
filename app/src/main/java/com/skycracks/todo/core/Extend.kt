@@ -65,6 +65,20 @@ fun Context.toast(@StringRes id: Int) {
     toast(getString(id))
 }
 
+val intervalTime : Long = 500//时间间隔(单位毫秒)
+
+var lastTime : Long = 0//上一次点击的时间(单位毫秒)
+/**
+ * 点击事件间隔
+ */
+fun View.interval(intervalBlock: () -> Unit) {
+    val currentTime = System.currentTimeMillis()
+    if(currentTime - lastTime  >= intervalTime){
+        lastTime = currentTime
+        intervalBlock()
+    }
+}
+
 fun Deferred<Any>?.cancelByActive() = this?.run {
     tryCatch {
         if (isActive) {

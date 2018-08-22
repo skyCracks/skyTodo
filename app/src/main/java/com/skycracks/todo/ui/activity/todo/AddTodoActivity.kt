@@ -12,6 +12,7 @@ import com.skycracks.todo.core.envent.TodoEvent
 import com.skycracks.todo.mvp.contract.todo.AddTodoContract
 import com.skycracks.todo.mvp.presenter.todo.AddTodoPresenter
 import formatCurrentDate
+import interval
 import kotlinx.android.synthetic.main.activity_add_todo.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.greenrobot.eventbus.EventBus
@@ -57,38 +58,42 @@ class AddTodoActivity : MvpActivity<AddTodoContract.View, AddTodoPresenter>(), A
             }
         }
         dateLayout.setOnClickListener {
-            closeKeyBord(contentEdit, this@AddTodoActivity)
-            val now = Calendar.getInstance()
-            val dpd = android.app.DatePickerDialog(this@AddTodoActivity,
-                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                        val currentMonth = month + 1
-                        mCurrentDate = "$year-$currentMonth-$dayOfMonth"
-                        dateText.text = mCurrentDate
-                    },
-                    now.get(Calendar.YEAR),
-                    now.get(Calendar.MONTH),
-                    now.get(Calendar.DAY_OF_MONTH)
-            )
-            dpd.show()
+            it.interval {
+                closeKeyBord(contentEdit, this@AddTodoActivity)
+                val now = Calendar.getInstance()
+                val dpd = android.app.DatePickerDialog(this@AddTodoActivity,
+                        DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                            val currentMonth = month + 1
+                            mCurrentDate = "$year-$currentMonth-$dayOfMonth"
+                            dateText.text = mCurrentDate
+                        },
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                )
+                dpd.show()
+            }
         }
         saveButton.setOnClickListener {
-            when (currentStatus) {
-                Constant.TODO_STATUS_ADD -> {
-                    val map = mutableMapOf<String, Any>()
-                    map["type"] = currentType
-                    map["title"] = titleEdit.text.toString()
-                    map["content"] = contentEdit.text.toString()
-                    map["date"] = mCurrentDate
-                    mPresenter?.addTodo(map)
-                }
-                Constant.TODO_STATUS_UPDATE -> {
-                    val map = mutableMapOf<String, Any>()
-                    map["type"] = currentType
-                    map["title"] = titleEdit.text.toString()
-                    map["content"] = contentEdit.text.toString()
-                    map["date"] = mCurrentDate
-                    map["status"] = mTodoBean?.status ?: 0
-                    mPresenter?.updateTodo(mTodoBean?.id ?: 0, map)
+            it.interval {
+                when (currentStatus) {
+                    Constant.TODO_STATUS_ADD -> {
+                        val map = mutableMapOf<String, Any>()
+                        map["type"] = currentType
+                        map["title"] = titleEdit.text.toString()
+                        map["content"] = contentEdit.text.toString()
+                        map["date"] = mCurrentDate
+                        mPresenter?.addTodo(map)
+                    }
+                    Constant.TODO_STATUS_UPDATE -> {
+                        val map = mutableMapOf<String, Any>()
+                        map["type"] = currentType
+                        map["title"] = titleEdit.text.toString()
+                        map["content"] = contentEdit.text.toString()
+                        map["date"] = mCurrentDate
+                        map["status"] = mTodoBean?.status ?: 0
+                        mPresenter?.updateTodo(mTodoBean?.id ?: 0, map)
+                    }
                 }
             }
         }

@@ -6,6 +6,7 @@ import com.skycracks.todo.R
 import com.skycracks.todo.base.BaseFragment
 import com.skycracks.todo.core.preference.Preference
 import com.skycracks.todo.ui.activity.account.LoginActivity
+import interval
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment() {
@@ -23,11 +24,13 @@ class MineFragment : BaseFragment() {
             rememberPassword = isChecked
         }
         logoutText.setOnClickListener {
-            activity?.run {
-                isLogin = false
-                Intent(this, LoginActivity::class.java).run {
-                    startActivity(this)
-                    finish()
+            it.interval {
+                activity?.run {
+                    isLogin = false
+                    Intent(this, LoginActivity::class.java).run {
+                        startActivity(this)
+                        finish()
+                    }
                 }
             }
         }

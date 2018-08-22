@@ -38,7 +38,7 @@
     <string name="remember_password">记住账号密码</string>
     <string name="github">github</string>
     <string name="api">API</string>
-    <string name="github_url">github_url</string>
+    <string name="github_url">https://github.com/skyCracks/skyTodo</string>
     <string name="api_url">http://www.wanandroid.com</string>
 
     <!-- todo -->

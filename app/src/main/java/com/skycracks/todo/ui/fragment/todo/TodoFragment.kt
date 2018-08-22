@@ -21,6 +21,7 @@ import com.skycracks.todo.core.widget.SwipeItemLayout
 import com.skycracks.todo.mvp.contract.todo.TodoContract
 import com.skycracks.todo.mvp.presenter.todo.TodoPresenter
 import com.skycracks.todo.ui.activity.todo.AddTodoActivity
+import interval
 import kotlinx.android.synthetic.main.fragment_todo.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -211,28 +212,30 @@ class TodoFragment : MvpFragment<TodoContract.View, TodoPresenter>(), TodoContra
 
     private val onItemChildClickListener =
             BaseQuickAdapter.OnItemChildClickListener { _, view, position ->
-                if (dataList.size != 0) {
-                    currentPosition = position
-                    val data = dataList[position].t
-                    when (view.id) {
-                        R.id.btn_delete -> {
-                            activity?.let {
-                                DialogUtil.getConfirmDialog(it, getString(R.string.confirm_delete),
-                                        DialogInterface.OnClickListener { _, _ ->
-                                            mPresenter?.deleteTodoById(data.id)
+                view.interval {
+                    if (dataList.size != 0) {
+                        currentPosition = position
+                        val data = dataList[position].t
+                        when (view.id) {
+                            R.id.btn_delete -> {
+                                activity?.let {
+                                    DialogUtil.getConfirmDialog(it, getString(R.string.confirm_delete),
+                                            DialogInterface.OnClickListener { _, _ ->
+                                                mPresenter?.deleteTodoById(data.id)
 
-                                        }).show()
+                                            }).show()
+                                }
                             }
-                        }
-                        R.id.btn_done -> {
-                            mPresenter?.updateTodoById(data.id, if (isDone) Constant.TODO_STATUS_NO else Constant.TODO_STATUS_DONE)
+                            R.id.btn_done -> {
 
-                        }
-                        R.id.item_todo_content -> {
-                            val status: String = if (isDone) Constant.TODO_STATUS_SHOW else Constant.TODO_STATUS_UPDATE
-                            EventBus.getDefault().postSticky(TodoEvent(currentType, status, data))
-                            Intent(activity, AddTodoActivity::class.java).run {
-                                startActivity(this)
+                                mPresenter?.updateTodoById(data.id, if (isDone) Constant.TODO_STATUS_NO else Constant.TODO_STATUS_DONE)
+                            }
+                            R.id.item_todo_content -> {
+                                val status: String = if (isDone) Constant.TODO_STATUS_SHOW else Constant.TODO_STATUS_UPDATE
+                                EventBus.getDefault().postSticky(TodoEvent(currentType, status, data))
+                                Intent(activity, AddTodoActivity::class.java).run {
+                                    startActivity(this)
+                                }
                             }
                         }
                     }

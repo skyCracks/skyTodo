@@ -9,6 +9,7 @@ import com.skycracks.todo.core.envent.LoginEvent
 import com.skycracks.todo.core.preference.Preference
 import com.skycracks.todo.mvp.contract.account.RegisterContract
 import com.skycracks.todo.mvp.presenter.account.RegisterPresenter
+import interval
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.greenrobot.eventbus.EventBus
@@ -38,8 +39,10 @@ class RegisterActivity : MvpActivity<RegisterContract.View,RegisterPresenter>(),
             }
         }
         register.setOnClickListener {
-            if(checkRegister()){
-                mPresenter?.registerWanAndroid(usernameEdit.text.toString(),passwordEdit.text.toString(),repasswordEdit.text.toString())
+            it.interval {
+                if (checkRegister()) {
+                    mPresenter?.registerWanAndroid(usernameEdit.text.toString(), passwordEdit.text.toString(), repasswordEdit.text.toString())
+                }
             }
         }
     }
