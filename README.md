@@ -1,7 +1,7 @@
 # skyTodo
 基于鸿洋大大的[wanandroid](http://wanandroid.com/)提供的[API](http://www.wanandroid.com/blog/show/2#30), 使用kotlin开发的备忘录APP
 
-**项目地址：[https://github.com/skyCracks/skyTodo]**
+**项目地址：[https://github.com/skyCracks/skyTodo](https://github.com/skyCracks/skyTodo)**
 
 # 代码结构
 
