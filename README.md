@@ -12,23 +12,29 @@
 * [BRVAH](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 * [eventbus](https://github.com/greenrobot/EventBus)
 
-由于学习kotlin一周就开始开发这款简单的APP,很多kotlin知识不了解，特此感谢
-* [WanAndroidClient](https://github.com/wangzailfm/WanAndroidClient)提供的Kotlin协程和Retrofit2组合的网络请求方案
-* [WanAndroid](https://github.com/iceCola7/WanAndroid)提供的todo实现方案
-
-**感谢开源，感谢可爱的开源作者们（ღ( ´･ᴗ･` )比心）**
-
 # 主要功能
 * **登录、注册、注销、记住密码**
 * **Todo功能： 新增、待办、已完成等功能**
 
 # 项目截图
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_01.png)  
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_02.png)
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_03.png)
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_04.png)
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_05.png)
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_06.png)
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_07.png)
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_08.png)
-![](https://github.com/skyCracks/skyTodo/blob/master/screenshots/Screenshots_09.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_01.png)  
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_02.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_03.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_04.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_05.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_06.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_07.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_08.png)
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshots_09.png)
+
+# apk下载
+![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/skytodo_v1.0.apk)
+
+# 感谢
+* [wanandroid](http://wanandroid.com/)提供的API
+* [WanAndroidClient](https://github.com/wangzailfm/WanAndroidClient)提供的Kotlin协程和Retrofit2组合的网络请求方案
+* [WanAndroid](https://github.com/iceCola7/WanAndroid)提供的todo实现方案
+
+**感谢开源，感谢可爱的开源作者们（ღ( ´･ᴗ･` )比心）**
+
+**项目中的 API 均来自于[wanandroid](http://wanandroid.com/)网站，纯属学习交流使用，不得用于商业用途。**
