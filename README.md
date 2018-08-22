@@ -39,7 +39,7 @@
 
 
 # apk下载
-![](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/skytodo_v1.0.apk)
+[APK](https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/skytodo_v1.0.apk)
 
 # 感谢
 * [wanandroid](http://wanandroid.com/)提供的API
