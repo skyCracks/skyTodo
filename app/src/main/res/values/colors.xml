@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#24B9FE</color>
+    <color name="colorPrimaryDark">#018BCD</color>
+    <color name="colorAccent">#018BCD</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bavigation_color">@color/text_content</color>
+    <color name="layout_bg_color">@color/white</color>
+
+    <color name="button_white">#F4F4F4</color>
+
+    <color name="text_title">#222222</color>
+    <color name="text_content">#666666</color>
+    <color name="text_desc">#888888</color>
+
+    <color name="text_red">#FF3A3A</color>
+    <color name="head_bg">#E0E0E0</color>
+    <color name="line">#F2F2F2</color>
+
+
+</resources>

@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">天空录</string>
+    <string name="exit_tip">再按一次退出程序</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="no_data">暂无数据</string>
+    <string name="no_network">网络异常</string>
+    <string name="no_network_tip">请检查网络后点击重新加载</string>
+    <string name="data_error">数据获取失败</string>
+    <string name="network_unavailable_tip">网络连接不可用,请检查网络设置!</string>
+
+    <!-- account-->
+    <string name="prompt_username">账号</string>
+    <string name="prompt_password">密码</string>
+    <string name="register">注册</string>
+    <string name="login">登录</string>
+    <string name="prompt_register">还没账号,点击注册</string>
+    <string name="prompt_input_username">请输入账号</string>
+    <string name="prompt_input_password">请输入密码</string>
+    <string name="prompt_input_password_confirm">请输入确认密码</string>
+    <string name="logout">退出登录</string>
+    <string name="login_success">登录成功</string>
+    <string name="register_success">注册成功</string>
+    <string name="username_not_empty">账号不能为空</string>
+    <string name="username_length_short">账号不能小于6位</string>
+    <string name="password_not_empty">密码不能为空</string>
+    <string name="password_length_short">密码长度不能小于6位</string>
+
+    <string name="repassword_not_empty">确认密码不能为空</string>
+    <string name="repassword_diff">确认密码不相同</string>
+
+    <!-- main-->
+    <string name="no_todo">待办清单</string>
+    <string name="done_todo">完成清单</string>
+    <string name="mine">我的</string>
+
+    <string name="account">账号</string>
+    <string name="remember_password">记住账号密码</string>
+    <string name="github">github</string>
+    <string name="api">API</string>
+    <string name="github_url">github_url</string>
+    <string name="api_url">http://www.wanandroid.com</string>
+
+    <!-- todo -->
+    <string name="todo_add">新增</string>
+    <string name="todo_update">编辑</string>
+    <string name="todo_show">查看</string>
+    <string name="mark_done">标记为已完成</string>
+    <string name="restore">复原</string>
+    <string name="delete">删除</string>
+    <string name="completed">已完成</string>
+    <string name="undone">已复原</string>
+    <string name="confirm_delete">确认删除</string>
+    <string name="delete_success">删除成功</string>
+    <string name="save_success">保存成功</string>
+    <string name="title_colon">标题:</string>
+    <string name="details_colon">详情:</string>
+    <string name="date_colon">日期:</string>
+    <string name="required">必填</string>
+    <string name="not_required">非必填</string>
+    <string name="save">保存</string>
+
+</resources>
