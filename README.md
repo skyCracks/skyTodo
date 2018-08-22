@@ -31,9 +31,9 @@
   </div>
   
   <div align="center">
-<img  height="330" width="190" src="https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_07.png" />
-  <img  height="330" width="190" src="https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_08.png" />
-   <img  height="330" width="190" src="https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_09.png" />
+<img  height="360" width="240" src="https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_07.png" />
+  <img  height="360" width="240" src="https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_08.png" />
+   <img  height="360" width="240" src="https://github.com/skyCracks/skyTodo/blob/e192bdbbea5a3f08dc9f5d490af233f1a80e1ae5/screenshots/Screenshot_09.png" />
   </div>
   
 
