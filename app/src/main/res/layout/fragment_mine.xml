@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <View
@@ -83,7 +82,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <View
@@ -129,9 +127,9 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/api"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:text="@string/api"
                 android:textColor="@color/text_title"
                 android:textSize="@dimen/text_title" />
 
@@ -184,8 +182,6 @@
             android:background="@color/line" />
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

@@ -6,4 +6,5 @@
     android:gravity="center"
     android:text="@string/no_data"
     android:textColor="@color/text_title"
-    android:textSize="@dimen/text_title" />
+    android:textSize="@dimen/text_title"
+    android:background="@color/layout_bg_color"/>
