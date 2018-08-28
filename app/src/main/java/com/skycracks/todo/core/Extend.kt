@@ -68,10 +68,11 @@ fun Context.toast(@StringRes id: Int) {
 val intervalTime : Long = 500//时间间隔(单位毫秒)
 
 var lastTime : Long = 0//上一次点击的时间(单位毫秒)
+
 /**
  * 点击事件间隔
  */
-fun View.interval(intervalBlock: () -> Unit) {
+ fun View.interval(intervalBlock : () -> Unit) {
     val currentTime = System.currentTimeMillis()
     if(currentTime - lastTime  >= intervalTime){
         lastTime = currentTime
@@ -153,20 +154,23 @@ inline fun tryCatch(catchBlock: (Throwable) -> Unit = {}, tryBlock: () -> Unit) 
 }
 
 @Suppress("DeferredResultUnused")
-fun <T> responseTransform(view: IView?, response: Deferred<BaseResponse<T>>?, transformBlock: (T) -> Unit = {}) {
+/**
+ * 将MVP View操作与协程操作封装转化简化返回要使用数据
+ */
+inline fun <T> IView.responseTransform(response: Deferred<BaseResponse<T>>?, crossinline transformBlock: (T) -> Unit = {}) {
     async(UI) {
         tryCatch({
             it.printStackTrace()
-            view?.showError(Constant.RESULT_SERVER_ERROR)
+            showError(Constant.RESULT_SERVER_ERROR)
         }) {
             val result = response?.await()
-            view?.hideLoading()
+            hideLoading()
             result ?: let {
-                view?.showError(Constant.RESULT_NULL)
+                showError(Constant.RESULT_NULL)
                 return@async
             }
             if (result.errorCode != 0) {
-                view?.showError(result.errorMsg)
+                showError(result.errorMsg)
             } else {
                 transformBlock(result.data)
             }
@@ -175,19 +179,22 @@ fun <T> responseTransform(view: IView?, response: Deferred<BaseResponse<T>>?, tr
 }
 
 @Suppress("DeferredResultUnused")
-fun responseTransform(view: IView?, response: Deferred<BaseResponse<Any>>?, transformBlock: () -> Unit = {}) {
+/**
+ * 将MVP View操作与协程操作封装转化简化返回要结果
+ */
+inline fun IView.responseTransform(response: Deferred<BaseResponse<Any>>?,crossinline transformBlock: () -> Unit = {}) {
     async(UI) {
         tryCatch({
             it.printStackTrace()
-            view?.showError(Constant.RESULT_SERVER_ERROR)
+            showError(Constant.RESULT_SERVER_ERROR)
         }) {
             val result = response?.await()
             result ?: let {
-                view?.showError(Constant.RESULT_NULL)
+                showError(Constant.RESULT_NULL)
                 return@async
             }
             if (result.errorCode != 0) {
-                view?.showError(result.errorMsg)
+                showError(result.errorMsg)
             } else {
                 transformBlock()
             }

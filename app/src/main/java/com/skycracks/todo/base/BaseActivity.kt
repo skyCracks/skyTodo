@@ -37,7 +37,7 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 网络状态变化的广播
      */
-    protected var mNetworkChangeReceiver: NetworkChangeReceiver? = null
+    protected lateinit var mNetworkChangeReceiver: NetworkChangeReceiver
 
     private val imm: InputMethodManager by lazy {
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -152,9 +152,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        if (mNetworkChangeReceiver != null) {
-            unregisterReceiver(mNetworkChangeReceiver)
-        }
+        unregisterReceiver(mNetworkChangeReceiver)
         super.onPause()
     }
 

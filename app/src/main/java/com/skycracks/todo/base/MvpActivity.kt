@@ -1,27 +1,21 @@
 package com.skycracks.todo.base
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.os.Bundle
 
 abstract class MvpActivity<V : IView ,T : BasePresenter<V>> : BaseActivity(), IView {
 
-    var mPresenter : T? = null
-        private set
-
+    val mPresenter by lazy { createPresenter() }
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = createPresenter()
-        mPresenter?.let {
-            it.attachView(this as V)
-        }
+        mPresenter.attachView(this as V)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter?.let {
-            it.detachView()
-        }
+        mPresenter.detachView()
     }
 
     /**

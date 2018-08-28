@@ -22,7 +22,7 @@ open class LoginPresenter : BasePresenter<LoginContract.View>(), LoginContract.P
         obtainView()?.run {
             loginAsync?.cancelByActive()
             loginAsync  = HttpHelperImpl.loginWanAndroid(username,password)
-            responseTransform<LoginBean>(this,loginAsync ){
+            responseTransform(loginAsync){
                 loginSuccess(it)
             }
         }

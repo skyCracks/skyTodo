@@ -21,7 +21,7 @@ class RegisterPresenter : BasePresenter<RegisterContract.View>() ,RegisterContra
         registerAsync?.cancelByActive()
         registerAsync = HttpHelperImpl.registerWanAndroid(username,password,repassowrd)
         obtainView()?.run {
-           responseTransform<LoginBean>(this,registerAsync){
+           responseTransform(registerAsync){
                registerSuccess(it)
            }
         }

@@ -31,7 +31,7 @@ open class TodoPresenter : BasePresenter<TodoContract.View>(), TodoContract.Pres
         getAllTodoListAsync?.cancelByActive()
         getAllTodoListAsync = HttpHelperImpl.getAllTodoList(type)
         obtainView()?.run {
-            responseTransform<AllTodoResponse>(this, getAllTodoListAsync)
+            responseTransform<AllTodoResponse>(getAllTodoListAsync)
         }
     }
 
@@ -42,7 +42,7 @@ open class TodoPresenter : BasePresenter<TodoContract.View>(), TodoContract.Pres
         getNoTodoListAsync?.cancelByActive()
         getNoTodoListAsync = HttpHelperImpl.getNoTodoList(page, type)
         obtainView()?.run {
-            responseTransform<TodoResponse>(this, getNoTodoListAsync) {
+            responseTransform<TodoResponse>( getNoTodoListAsync) {
                 showTodoList(it)
             }
         }
@@ -52,7 +52,7 @@ open class TodoPresenter : BasePresenter<TodoContract.View>(), TodoContract.Pres
         getDoneListAsync?.cancelByActive()
         getDoneListAsync = HttpHelperImpl.getDoneList(page, type)
         obtainView()?.run {
-            responseTransform<TodoResponse>(this, getDoneListAsync) {
+            responseTransform<TodoResponse>( getDoneListAsync) {
                 showTodoList(it)
             }
         }
@@ -62,7 +62,7 @@ open class TodoPresenter : BasePresenter<TodoContract.View>(), TodoContract.Pres
         deleteTodoByIdAsync?.cancelByActive()
         deleteTodoByIdAsync = HttpHelperImpl.deleteTodoById(id)
         obtainView()?.run {
-            responseTransform(this, deleteTodoByIdAsync) {
+            responseTransform( deleteTodoByIdAsync) {
                 showDeleteSuccess()
             }
         }
@@ -72,7 +72,7 @@ open class TodoPresenter : BasePresenter<TodoContract.View>(), TodoContract.Pres
         updateTodoByIdAsync?.cancelByActive()
         updateTodoByIdAsync = HttpHelperImpl.updateTodoById(id, status)
         obtainView()?.run {
-            responseTransform(this, updateTodoByIdAsync) {
+            responseTransform(updateTodoByIdAsync) {
                 showUpdateSuccess()
             }
         }

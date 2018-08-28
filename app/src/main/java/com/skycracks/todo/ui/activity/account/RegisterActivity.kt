@@ -21,9 +21,7 @@ class RegisterActivity : MvpActivity<RegisterContract.View,RegisterPresenter>(),
 
     private var password: String by Preference(Constant.PASSWORD_KEY, "")
 
-    override fun createPresenter(): RegisterPresenter {
-        return RegisterPresenter()
-    }
+    override fun createPresenter(): RegisterPresenter = RegisterPresenter()
 
     override fun setLayoutId(): Int = R.layout.activity_register
 

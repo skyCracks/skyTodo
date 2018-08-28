@@ -4,23 +4,17 @@ import android.os.Bundle
 
 abstract class MvpFragment<V : IView ,T : BasePresenter<V>> : BaseFragment() , IView {
 
-    var mPresenter : T? = null
-        private set
+    val mPresenter by lazy { createPresenter() }
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = createPresenter()
-        mPresenter?.let {
-            it.attachView(this as V)
-        }
+        mPresenter.attachView(this as V)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter?.let {
-            it.detachView()
-        }
+        mPresenter.detachView()
     }
 
     /**

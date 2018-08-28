@@ -27,7 +27,7 @@ open class AddTodoPresenter : BasePresenter<AddTodoContract.View>(), AddTodoCont
         addTodoAsync?.cancelByActive()
         addTodoAsync = HttpHelperImpl.addTodo(map)
         obtainView()?.run {
-            responseTransform(this,addTodoAsync){
+            responseTransform(addTodoAsync){
               showAddTodoSuccess()
             }
         }
@@ -37,7 +37,7 @@ open class AddTodoPresenter : BasePresenter<AddTodoContract.View>(), AddTodoCont
         updateTodoAsync?.cancelByActive()
         updateTodoAsync = HttpHelperImpl.updateTodo(id,map)
         obtainView()?.run {
-            responseTransform(this,updateTodoAsync){
+            responseTransform(updateTodoAsync){
                 showUpdateTodoSuccess()
             }
         }
