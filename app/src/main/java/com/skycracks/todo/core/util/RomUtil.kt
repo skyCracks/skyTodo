@@ -78,14 +78,14 @@ object RomUtil {
         try {
             val p = Runtime.getRuntime().exec("getprop " + propName)
             input = BufferedReader(InputStreamReader(p.inputStream), 1024)
-            line = input!!.readLine()
-            input!!.close()
+            line = input.readLine()
+            input.close()
         } catch (ex: IOException) {
             return null
         } finally {
             if (input != null) {
                 try {
-                    input!!.close()
+                    input.close()
                 } catch (e: IOException) {
                 }
 

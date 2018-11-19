@@ -3,11 +3,11 @@ package com.skycracks.todo.ui.fragment.todo
 import Constant
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import com.cxz.wanandroid.adapter.TodoPagerAdapter
 import com.skycracks.todo.R
 import com.skycracks.todo.base.BaseFragment
 import com.skycracks.todo.core.bean.TodoTypeBean
 import com.skycracks.todo.core.envent.TodoTypeEvent
+import com.skycracks.todo.ui.adapter.TodoPagerAdapter
 import kotlinx.android.synthetic.main.fragment_todo_type.*
 import org.greenrobot.eventbus.EventBus
 
@@ -20,7 +20,7 @@ class TodoTypeFragment : BaseFragment() , TabLayout.OnTabSelectedListener{
     private lateinit var data : MutableList<TodoTypeBean>
 
     companion object {
-        fun getInstance(done : Boolean): TodoTypeFragment {
+        fun newInstance(done : Boolean): TodoTypeFragment {
             val fragment = TodoTypeFragment()
             val bundle = Bundle()
             bundle.putBoolean(Constant.TODO_DONE_KEY, done)

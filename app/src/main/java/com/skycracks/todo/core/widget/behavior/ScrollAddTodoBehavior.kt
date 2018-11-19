@@ -1,5 +1,6 @@
 package com.skycracks.todo.core.widget.behavior
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.FloatingActionButton
@@ -10,7 +11,7 @@ import android.view.View
 import com.skycracks.todo.base.BaseApplication
 import com.skycracks.todo.core.util.AnimatorUtil
 
-class ScrollAddTodoBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior(BaseApplication.context, attrs) {
+class ScrollAddTodoBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior(context, attrs) {
 
     /**
      * 是否正在动画
@@ -28,6 +29,7 @@ class ScrollAddTodoBehavior(context: Context, attrs: AttributeSet) : FloatingAct
                 super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type)
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onNestedScroll(coordinatorLayout: CoordinatorLayout, child: FloatingActionButton, target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type)
         if (dyConsumed > 0 && child.visibility == View.VISIBLE) {

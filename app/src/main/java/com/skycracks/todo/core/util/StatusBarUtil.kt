@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATED_IDENTITY_EQUALS")
+
 package com.skycracks.todo.core.util
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
@@ -53,10 +56,10 @@ object StatusBarUtil {
             val decorView = activity.window.decorView as ViewGroup
             val fakeStatusBarView = decorView.findViewById<View>(FAKE_STATUS_BAR_VIEW_ID)
             if (fakeStatusBarView != null) {
-                if (fakeStatusBarView!!.visibility === View.GONE) {
-                    fakeStatusBarView!!.visibility = View.VISIBLE
+                if (fakeStatusBarView.visibility === View.GONE) {
+                    fakeStatusBarView.visibility = View.VISIBLE
                 }
-                fakeStatusBarView!!.setBackgroundColor(calculateStatusColor(color, statusBarAlpha))
+                fakeStatusBarView.setBackgroundColor(calculateStatusColor(color, statusBarAlpha))
             } else {
                 decorView.addView(createStatusBarView(activity, color, statusBarAlpha))
             }
@@ -87,6 +90,7 @@ object StatusBarUtil {
             val contentView = activity.findViewById<View>(android.R.id.content) as ViewGroup
             val rootView = contentView.getChildAt(0)
             val statusBarHeight = getStatusBarHeight(activity)
+
             if (rootView != null && rootView is CoordinatorLayout) {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     rootView.fitsSystemWindows = false
@@ -133,10 +137,10 @@ object StatusBarUtil {
         // 移除半透明矩形,以免叠加
         val fakeStatusBarView = contentView.findViewById<View>(FAKE_STATUS_BAR_VIEW_ID)
         if (fakeStatusBarView != null) {
-            if (fakeStatusBarView!!.visibility === View.GONE) {
-                fakeStatusBarView!!.visibility = View.VISIBLE
+            if (fakeStatusBarView.visibility === View.GONE) {
+                fakeStatusBarView.visibility = View.VISIBLE
             }
-            fakeStatusBarView!!.setBackgroundColor(color)
+            fakeStatusBarView.setBackgroundColor(color)
         } else {
             contentView.addView(createStatusBarView(activity, color))
         }
@@ -266,10 +270,10 @@ object StatusBarUtil {
         val contentLayout = drawerLayout.getChildAt(0) as ViewGroup
         val fakeStatusBarView = contentLayout.findViewById<View>(FAKE_STATUS_BAR_VIEW_ID)
         if (fakeStatusBarView != null) {
-            if (fakeStatusBarView!!.visibility === View.GONE) {
-                fakeStatusBarView!!.visibility = View.VISIBLE
+            if (fakeStatusBarView.visibility === View.GONE) {
+                fakeStatusBarView.visibility = View.VISIBLE
             }
-            fakeStatusBarView!!.setBackgroundColor(color)
+            fakeStatusBarView.setBackgroundColor(color)
         } else {
             contentLayout.addView(createStatusBarView(activity, color), 0)
         }
@@ -316,7 +320,7 @@ object StatusBarUtil {
                 if (fakeStatusBarView.visibility === View.GONE) {
                     fakeStatusBarView.visibility = View.VISIBLE
                 }
-                fakeStatusBarView!!.setBackgroundColor(calculateStatusColor(color, DEFAULT_STATUS_BAR_ALPHA))
+                fakeStatusBarView.setBackgroundColor(calculateStatusColor(color, DEFAULT_STATUS_BAR_ALPHA))
             } else {
                 // 添加 statusBarView 到布局中
                 contentLayout.addView(createStatusBarView(activity, color), 0)
@@ -440,14 +444,14 @@ object StatusBarUtil {
         setTransparentForWindow(activity)
         addTranslucentView(activity, statusBarAlpha)
         if (needOffsetView != null) {
-            val haveSetOffset = needOffsetView!!.getTag(TAG_KEY_HAVE_SET_OFFSET)
+            val haveSetOffset = needOffsetView.getTag(TAG_KEY_HAVE_SET_OFFSET)
             if (haveSetOffset != null && haveSetOffset as Boolean) {
                 return
             }
-            val layoutParams = needOffsetView!!.layoutParams as ViewGroup.MarginLayoutParams
+            val layoutParams = needOffsetView.layoutParams as ViewGroup.MarginLayoutParams
             layoutParams.setMargins(layoutParams.leftMargin, layoutParams.topMargin + getStatusBarHeight(activity),
                     layoutParams.rightMargin, layoutParams.bottomMargin)
-            needOffsetView!!.setTag(TAG_KEY_HAVE_SET_OFFSET, true)
+            needOffsetView.setTag(TAG_KEY_HAVE_SET_OFFSET, true)
         }
     }
 
@@ -495,11 +499,11 @@ object StatusBarUtil {
         val decorView = activity.window.decorView as ViewGroup
         val fakeStatusBarView = decorView.findViewById<View>(FAKE_STATUS_BAR_VIEW_ID)
         if (fakeStatusBarView != null) {
-            fakeStatusBarView!!.setVisibility(View.GONE)
+            fakeStatusBarView.visibility = View.GONE
         }
         val fakeTranslucentView = decorView.findViewById<View>(FAKE_TRANSLUCENT_VIEW_ID)
         if (fakeTranslucentView != null) {
-            fakeTranslucentView!!.setVisibility(View.GONE)
+            fakeStatusBarView.visibility = View.GONE
         }
     }
 
@@ -586,10 +590,10 @@ object StatusBarUtil {
         val contentView = activity.findViewById<View>(android.R.id.content) as ViewGroup
         val fakeTranslucentView = contentView.findViewById<View>(FAKE_TRANSLUCENT_VIEW_ID)
         if (fakeTranslucentView != null) {
-            if (fakeTranslucentView!!.visibility === View.GONE) {
-                fakeTranslucentView!!.visibility = View.VISIBLE
+            if (fakeTranslucentView.visibility === View.GONE) {
+                fakeTranslucentView.visibility = View.VISIBLE
             }
-            fakeTranslucentView!!.setBackgroundColor(Color.argb(statusBarAlpha, 0, 0, 0))
+            fakeTranslucentView.setBackgroundColor(Color.argb(statusBarAlpha, 0, 0, 0))
         } else {
             contentView.addView(createTranslucentStatusBarView(activity, statusBarAlpha))
         }
@@ -738,10 +742,11 @@ object StatusBarUtil {
         }// N/A do nothing
     }
 
+    @SuppressLint("PrivateApi")
     private fun setMIUILightStatusBar(activity: Activity, darkmode: Boolean): Boolean {
         val clazz = activity.window.javaClass
         try {
-            var darkModeFlag = 0
+            var darkModeFlag : Int
             val layoutParams = Class.forName("android.view.MiuiWindowManager\$LayoutParams")
             val field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE")
             darkModeFlag = field.getInt(layoutParams)

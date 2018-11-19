@@ -11,10 +11,10 @@ import android.widget.EditText
 import android.widget.Toast
 import com.skycracks.todo.base.IView
 import com.skycracks.todo.core.bean.BaseResponse
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.JobCancellationException
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -146,7 +146,7 @@ fun closeKeyBord(mEditText: EditText, mContext: Context) {
 inline fun tryCatch(catchBlock: (Throwable) -> Unit = {}, tryBlock: () -> Unit) {
     try {
         tryBlock()
-    } catch (_: JobCancellationException) {
+    } catch (_: Exception) {
 
     } catch (t: Throwable) {
         catchBlock(t)
@@ -158,7 +158,7 @@ inline fun tryCatch(catchBlock: (Throwable) -> Unit = {}, tryBlock: () -> Unit) 
  * 将MVP View操作与协程操作封装转化简化返回要使用数据
  */
 inline fun <T> IView.responseTransform(response: Deferred<BaseResponse<T>>?, crossinline transformBlock: (T) -> Unit = {}) {
-    async(UI) {
+    GlobalScope.async(Dispatchers.Main){
         tryCatch({
             it.printStackTrace()
             showError(Constant.RESULT_SERVER_ERROR)
@@ -183,7 +183,7 @@ inline fun <T> IView.responseTransform(response: Deferred<BaseResponse<T>>?, cro
  * 将MVP View操作与协程操作封装转化简化返回要结果
  */
 inline fun IView.responseTransform(response: Deferred<BaseResponse<Any>>?,crossinline transformBlock: () -> Unit = {}) {
-    async(UI) {
+    GlobalScope.async(Dispatchers.Main) {
         tryCatch({
             it.printStackTrace()
             showError(Constant.RESULT_SERVER_ERROR)

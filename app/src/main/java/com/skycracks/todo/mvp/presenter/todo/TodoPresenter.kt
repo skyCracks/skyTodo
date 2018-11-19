@@ -7,7 +7,7 @@ import com.skycracks.todo.core.bean.BaseResponse
 import com.skycracks.todo.core.bean.TodoResponse
 import com.skycracks.todo.core.http.HttpHelperImpl
 import com.skycracks.todo.mvp.contract.todo.TodoContract
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import responseTransform
 
 open class TodoPresenter : BasePresenter<TodoContract.View>(), TodoContract.Presenter {

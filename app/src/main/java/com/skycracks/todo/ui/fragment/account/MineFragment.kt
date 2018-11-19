@@ -17,10 +17,16 @@ class MineFragment : BaseFragment() {
 
     override fun setLayoutId(): Int = R.layout.fragment_mine
 
+    companion object {
+        fun newInstance(): MineFragment {
+            return MineFragment()
+        }
+    }
+
     override fun initView() {
         accountText.text = username
         rememberPasswordCheckBox.isChecked = rememberPassword
-        rememberPasswordCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+        rememberPasswordCheckBox.setOnCheckedChangeListener { _, isChecked ->
             rememberPassword = isChecked
         }
         logoutText.setOnClickListener {

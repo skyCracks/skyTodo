@@ -1,7 +1,7 @@
 package com.skycracks.todo.core.http
 
 import Constant
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.skycracks.todo.base.BaseApplication
 import com.skycracks.todo.core.preference.Preference
 import com.skycracks.todo.core.util.NetWorkUtil

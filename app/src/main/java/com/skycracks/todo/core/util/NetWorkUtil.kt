@@ -2,24 +2,71 @@ package com.skycracks.todo.core.util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.telephony.TelephonyManager
-import com.skycracks.todo.base.BaseApplication.Companion.context
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.NetworkInterface
 import java.net.SocketException
 import java.net.URL
 
-class NetWorkUtil {
+object NetWorkUtil {
 
-    companion object {
+    private const val TIMEOUT = 3000
 
-        var NET_CNNT_BAIDU_OK = 1 // NetworkAvailable
-        var NET_CNNT_BAIDU_TIMEOUT = 2 // no NetworkAvailable
-        var NET_NOT_PREPARE = 3 // Net no ready
-        var NET_ERROR = 4 //net error
-        private val TIMEOUT = 3000 // TIMEOUT
+    private const val NETWORK_AVAILABLE = "available"
+
+    private const val NETWORK_CONNECTED = "connected"
+
+    private const val NETWORK_WIFI = "wifi"
+
+    private const val NETWORK_MOBILE = "mobile"
+
+    private const val NETWORK_2G = "2g"
+
+    private const val NETWORK_3G = "3g"
+
+     private fun isNetworkInfoStatus(context: Context?, status: String): Boolean {
+         context?.let{
+             val manager = it.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+             manager.activeNetworkInfo?.run {
+                 when(status){
+                     NETWORK_AVAILABLE ->{
+                         return this.isAvailable
+                     }
+                     NETWORK_CONNECTED ->{
+                         return this.isConnected
+                     }
+                     NETWORK_WIFI ->{
+                         return this.type == ConnectivityManager.TYPE_WIFI
+                     }
+                     NETWORK_MOBILE ->{
+                         if (this.type == ConnectivityManager.TYPE_MOBILE) {
+                             return this.isAvailable
+                         }
+                     }
+                     NETWORK_2G ->{
+                         when(this.subtype){
+                             TelephonyManager.NETWORK_TYPE_EDGE,
+                             TelephonyManager.NETWORK_TYPE_GPRS,
+                             TelephonyManager.NETWORK_TYPE_CDMA ->{
+                                 return true
+                             }
+                             else ->{
+                                 return false
+                             }
+                         }
+                     }
+                     NETWORK_3G ->{
+                         return this.type == ConnectivityManager.TYPE_MOBILE
+                     }
+                     else ->{
+                         return false
+                     }
+                 }
+             }
+         }
+         return false
+     }
         /**
          * check NetworkAvailable
          *
@@ -28,13 +75,7 @@ class NetWorkUtil {
          */
         @JvmStatic
         fun isNetworkAvailable(context: Context?): Boolean {
-            if(context != null) {
-                val manager = context?.applicationContext.getSystemService(
-                        Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                val info = manager?.activeNetworkInfo
-                return !(null == info || !info?.isAvailable)
-            }
-            return false
+            return isNetworkInfoStatus(context,NETWORK_AVAILABLE)
         }
 
         /**
@@ -44,13 +85,50 @@ class NetWorkUtil {
          * @return
          */
         fun isNetworkConnected(context: Context?): Boolean {
-            if(context != null){
-                val manager = context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                val info = manager?.activeNetworkInfo
-                return !(null == info || !info?.isConnected)
-            }
-            return false
+            return isNetworkInfoStatus(context,NETWORK_CONNECTED)
         }
+
+    /**
+     * isWifi
+     *
+     * @param context
+     * @return boolean
+     */
+    @JvmStatic
+    fun isWifi(context: Context?): Boolean {
+       return isNetworkInfoStatus(context,NETWORK_WIFI)
+    }
+
+    /**
+     * 判断MOBILE网络是否可用
+     */
+    fun isMobile(context: Context?): Boolean {
+        return isNetworkInfoStatus(context, NETWORK_MOBILE)
+    }
+
+    /**
+     * check is3G
+     *
+     * @param context
+     * @return boolean
+     */
+    @JvmStatic
+    fun is3G(context: Context?): Boolean {
+        return isNetworkInfoStatus(context, NETWORK_3G)
+    }
+
+    /**
+     * is2G
+     *
+     * @param context
+     * @return boolean
+     */
+    @JvmStatic
+    fun is2G(context: Context?): Boolean {
+        return isNetworkInfoStatus(context, NETWORK_2G)
+    }
+
+
 
         /**
          * 得到ip地址
@@ -58,7 +136,7 @@ class NetWorkUtil {
          * @return
          */
         @JvmStatic
-        fun getLocalIpAddress(): String {
+     fun getLocalIpAddress(): String {
             var ret = ""
             try {
                 val en = NetworkInterface.getNetworkInterfaces()
@@ -103,79 +181,4 @@ class NetWorkUtil {
             return result
         }
 
-        /**
-         * check is3G
-         *
-         * @param context
-         * @return boolean
-         */
-        @JvmStatic
-        fun is3G(context: Context?): Boolean {
-            val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val activeNetInfo = connectivityManager?.activeNetworkInfo
-            return activeNetInfo?.type == ConnectivityManager.TYPE_MOBILE
-        }
-
-        /**
-         * isWifi
-         *
-         * @param context
-         * @return boolean
-         */
-        @JvmStatic
-        fun isWifi(context: Context?): Boolean {
-            val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val activeNetInfo = connectivityManager?.activeNetworkInfo
-            return activeNetInfo?.type == ConnectivityManager.TYPE_WIFI
-        }
-
-        /**
-         * is2G
-         *
-         * @param context
-         * @return boolean
-         */
-        @JvmStatic
-        fun is2G(context: Context?): Boolean {
-            val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val activeNetInfo = connectivityManager?.activeNetworkInfo
-            when(activeNetInfo?.subtype){
-                TelephonyManager.NETWORK_TYPE_EDGE,
-                TelephonyManager.NETWORK_TYPE_GPRS,
-                TelephonyManager.NETWORK_TYPE_CDMA ->{
-                    return true
-                }
-                else ->{
-                    return false
-                }
-            }
-        }
-
-        /**
-         * is wifi on
-         */
-        @JvmStatic
-        fun isWifiEnabled(context: Context?): Boolean {
-            val mgrConn = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val mgrTel = context?.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            return  mgrConn?.activeNetworkInfo.state == NetworkInfo.State.CONNECTED || mgrTel?.networkType == TelephonyManager.NETWORK_TYPE_UMTS
-        }
-
-        /**
-         * 判断MOBILE网络是否可用
-         */
-        fun isMobile(context: Context?): Boolean {
-            if (context != null) {
-                //获取手机所有连接管理对象(包括对wi-fi,net等连接的管理)
-                val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                //获取NetworkInfo对象
-                val networkInfo = manager?.activeNetworkInfo
-                //判断NetworkInfo对象是否为空 并且类型是否为MOBILE
-                if (networkInfo?.type == ConnectivityManager.TYPE_MOBILE) {
-                    return networkInfo.isAvailable
-                }
-            }
-            return false
-        }
     }
-}

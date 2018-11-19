@@ -44,7 +44,7 @@ class LoginActivity : MvpActivity<LoginContract.View, LoginPresenter>(), LoginCo
         login.setOnClickListener{
             it.interval {
                 if (checkLogin()) {
-                    mPresenter?.loginWanAndroid(usernameEdit.text.toString(), passwordEdit.text.toString())
+                    mPresenter.loginWanAndroid(usernameEdit.text.toString(), passwordEdit.text.toString())
                 }
             }
         }

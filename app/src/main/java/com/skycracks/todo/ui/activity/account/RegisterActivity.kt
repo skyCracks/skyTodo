@@ -39,7 +39,7 @@ class RegisterActivity : MvpActivity<RegisterContract.View,RegisterPresenter>(),
         register.setOnClickListener {
             it.interval {
                 if (checkRegister()) {
-                    mPresenter?.registerWanAndroid(usernameEdit.text.toString(), passwordEdit.text.toString(), repasswordEdit.text.toString())
+                    mPresenter.registerWanAndroid(usernameEdit.text.toString(), passwordEdit.text.toString(), repasswordEdit.text.toString())
                 }
             }
         }

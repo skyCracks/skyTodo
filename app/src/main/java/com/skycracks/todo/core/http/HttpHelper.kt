@@ -4,8 +4,7 @@ import com.skycracks.todo.core.bean.AllTodoResponse
 import com.skycracks.todo.core.bean.BaseResponse
 import com.skycracks.todo.core.bean.LoginBean
 import com.skycracks.todo.core.bean.TodoResponse
-import kotlinx.coroutines.experimental.Deferred
-import retrofit2.http.FieldMap
+import kotlinx.coroutines.Deferred
 
 interface HttpHelper {
 
@@ -25,5 +24,5 @@ interface HttpHelper {
 
     fun addTodo(map: MutableMap<String, Any>): Deferred<BaseResponse<Any>>
 
-    fun updateTodo(id: Int, @FieldMap map: MutableMap<String, Any>): Deferred<BaseResponse<Any>>
+    fun updateTodo(id: Int,map: MutableMap<String, Any>): Deferred<BaseResponse<Any>>
 }

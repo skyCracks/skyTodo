@@ -8,8 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.cxz.wanandroid.adapter.TodoAdapter
-import com.cxz.wanandroid.widget.SpaceItemDecoration
 import com.skycracks.todo.R
 import com.skycracks.todo.base.MvpFragment
 import com.skycracks.todo.core.bean.TodoDataBean
@@ -17,10 +15,12 @@ import com.skycracks.todo.core.bean.TodoResponse
 import com.skycracks.todo.core.envent.RefreshTodoEvent
 import com.skycracks.todo.core.envent.TodoEvent
 import com.skycracks.todo.core.util.DialogUtil
+import com.skycracks.todo.core.widget.SpaceItemDecoration
 import com.skycracks.todo.core.widget.SwipeItemLayout
 import com.skycracks.todo.mvp.contract.todo.TodoContract
 import com.skycracks.todo.mvp.presenter.todo.TodoPresenter
 import com.skycracks.todo.ui.activity.todo.AddTodoActivity
+import com.skycracks.todo.ui.adapter.TodoAdapter
 import interval
 import kotlinx.android.synthetic.main.fragment_todo.*
 import org.greenrobot.eventbus.EventBus
@@ -81,10 +81,13 @@ class TodoFragment : MvpFragment<TodoContract.View, TodoPresenter>(), TodoContra
         recyclerView.run {
             layoutManager = linearLayoutManager
             itemAnimator = DefaultItemAnimator()
-            addItemDecoration(recyclerViewItemDecoration)
+            recyclerViewItemDecoration?.let { addItemDecoration(it) }
             adapter = todoAdapter
-            addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(activity))
-        }
+            activity?.let {
+                addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(it))
+                }
+            }
+
         todoAdapter.run {
             bindToRecyclerView(recyclerView)
             setOnLoadMoreListener(onLoadMoreListener, recyclerView)

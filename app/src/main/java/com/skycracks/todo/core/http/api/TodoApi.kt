@@ -3,7 +3,7 @@ package com.skycracks.todo.core.http.api
 import com.skycracks.todo.core.bean.AllTodoResponse
 import com.skycracks.todo.core.bean.BaseResponse
 import com.skycracks.todo.core.bean.TodoResponse
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.http.*
 
 interface TodoApi {

@@ -16,6 +16,7 @@ import com.skycracks.todo.ui.fragment.account.MineFragment
 import com.skycracks.todo.ui.fragment.todo.TodoTypeFragment
 import interval
 import kotlinx.android.synthetic.main.activity_main.*
+
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -66,7 +67,7 @@ class MainActivity : BaseActivity() {
      */
     private val onNavigationItemSelectedListener =
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
-                setFragment(item.itemId)
+                showFragment(item.itemId)
                 return@OnNavigationItemSelectedListener when (item.itemId) {
                     R.id.action_no_todo -> {
                         addTodoFloatButton.visibility = View.VISIBLE
@@ -89,22 +90,22 @@ class MainActivity : BaseActivity() {
     /**
      * 显示对应Fragment
      */
-    private fun setFragment(index: Int) {
+    private fun showFragment(index: Int) {
         fragmentManager.beginTransaction().apply {
-            noTodoTypeFragment ?: let {
-                TodoTypeFragment.getInstance(false).let {
+            if (noTodoTypeFragment == null) {
+                TodoTypeFragment.newInstance(false).let {
                     noTodoTypeFragment = it
                     add(R.id.fragmentContent, it)
                 }
             }
-            doneTodoTypeFragment ?: let {
-                TodoTypeFragment.getInstance(true).let {
+            if (doneTodoTypeFragment == null) {
+                TodoTypeFragment.newInstance(true).let {
                     doneTodoTypeFragment = it
                     add(R.id.fragmentContent, it)
                 }
             }
-            mineFragment ?: let {
-                MineFragment().let {
+            if (mineFragment == null) {
+                MineFragment.newInstance().let {
                     mineFragment = it
                     add(R.id.fragmentContent, it)
                 }
@@ -112,21 +113,21 @@ class MainActivity : BaseActivity() {
             hideFragment(this)
             when (index) {
                 R.id.action_no_todo -> {
-                    toolbarTitle.text  = getString(R.string.no_todo)
+                    toolbarTitle.text = getString(R.string.no_todo)
                     noTodoTypeFragment?.let {
-                        this.show(it)
+                        show(it)
                     }
                 }
                 R.id.action_done_todo -> {
-                    toolbarTitle.text  = getString(R.string.done_todo)
+                    toolbarTitle.text = getString(R.string.done_todo)
                     doneTodoTypeFragment?.let {
-                        this.show(it)
+                        show(it)
                     }
                 }
                 R.id.action_mine -> {
-                    toolbarTitle.text  = getString(R.string.mine)
+                    toolbarTitle.text = getString(R.string.mine)
                     mineFragment?.let {
-                        this.show(it)
+                        show(it)
                     }
                 }
             }
@@ -147,8 +148,6 @@ class MainActivity : BaseActivity() {
             transaction.hide(it)
         }
     }
-
-
 
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

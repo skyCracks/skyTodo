@@ -1,6 +1,5 @@
 package com.skycracks.todo.base
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.os.Bundle
 
 abstract class MvpActivity<V : IView ,T : BasePresenter<V>> : BaseActivity(), IView {

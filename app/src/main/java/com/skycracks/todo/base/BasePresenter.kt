@@ -12,15 +12,11 @@ abstract class BasePresenter<V : IView> : IPresenter<V>{
     }
 
     fun obtainView(): V? {
-        return  mView?.let {
-            it.get()
-        }
+        return  mView?.get()
     }
 
     override fun detachView() {
-        mView?.let {
-            it.clear()
-        }
+        mView?.clear()
         mView = null
         cancelRequest()
     }

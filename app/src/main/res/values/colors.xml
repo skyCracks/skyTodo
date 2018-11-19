@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#018BCD</color>
     <color name="colorAccent">#018BCD</color>
     <color name="white">#FFFFFF</color>
-    <color name="bavigation_color">@color/text_content</color>
+    <color name="navigation_color">@color/text_content</color>
     <color name="layout_bg_color">@color/white</color>
 
     <color name="button_white">#F4F4F4</color>

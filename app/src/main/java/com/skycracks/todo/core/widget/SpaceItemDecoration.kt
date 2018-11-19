@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.widget
+package com.skycracks.todo.core.widget
 
 import android.content.Context
 import android.graphics.Canvas
@@ -25,32 +25,31 @@ class SpaceItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
     private var attrs: IntArray = intArrayOf(android.R.attr.listDivider)
 
     init {
-        var a = context.obtainStyledAttributes(attrs)
+        val a = context.obtainStyledAttributes(attrs)
         mDivider = a.getDrawable(0)
         a.recycle()
     }
 
-    override fun onDrawOver(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         if (mDivider != null && mDrawOver) {
-            draw(c!!, parent!!)
+            draw(c, parent)
         }
     }
 
-    override fun onDraw(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
         if (mDivider != null && mDrawOver) {
-            draw(c!!, parent!!)
+            draw(c, parent)
         }
     }
 
-    override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
-
-        if (getOrientation(parent!!.layoutManager) == RecyclerView.VERTICAL) {
-            outRect?.set(mSectionOffsetH, 0, mSectionOffsetH, mSectionOffsetV)
+        if (getOrientation(parent.layoutManager!!) == RecyclerView.VERTICAL) {
+            outRect.set(mSectionOffsetH, 0, mSectionOffsetH, mSectionOffsetV)
         } else {
-            outRect?.set(0, 0, mSectionOffsetV, 0)
+            outRect.set(0, 0, mSectionOffsetV, 0)
         }
     }
 
@@ -64,7 +63,7 @@ class SpaceItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
             val params = child.layoutParams as RecyclerView.LayoutParams
 
-            val top = child.bottom + params.bottomMargin + Math.round(ViewCompat.getTranslationY(child))
+            val top = child.bottom + params.bottomMargin + Math.round(child.translationY)
             val bottom = top + if (mDivider!!.intrinsicHeight <= 0) 1 else mDivider!!.intrinsicHeight
 
             mDivider?.let {

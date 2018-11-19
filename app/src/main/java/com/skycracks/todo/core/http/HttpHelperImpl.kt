@@ -6,7 +6,7 @@ import com.skycracks.todo.core.bean.LoginBean
 import com.skycracks.todo.core.bean.TodoResponse
 import com.skycracks.todo.core.http.api.AccountApi
 import com.skycracks.todo.core.http.api.TodoApi
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 
 object HttpHelperImpl : HttpHelper{
 
